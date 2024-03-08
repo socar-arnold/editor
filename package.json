@@ -1,0 +1,15 @@
+{
+  "homepage": "https://sanghunlee-711.github.io/the-simple-editor",
+  "name": "the-simple-editor",
+  "version": "0.0.1",
+  "description": "the simple editor that support webcomponents and SPA components",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "editor"
+  ],
+  "author": "sanghun lee",
+  "license": "MIT"
+}
