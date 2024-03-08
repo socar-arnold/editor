@@ -1,5 +1,7 @@
 # TSE
 
+**[Check this demo page](https://sanghunlee-711.github.io/the-simple-editor/)**
+
 The Simple Editor is made only with Vanila Javascript, HTML5, CSS3
 Javascript trying to follow MVC(Model, View, Controller) pattern for managing code easily(Modular design, Seperate of concerns ETC..)
 
