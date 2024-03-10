@@ -1,4 +1,5 @@
-import { $toolbarItem, $toolbarSeperator } from '../constants/element.js';
+import { $tseEditorToolbar } from '../constants/element.js';
+import { createButton, createIcon, createSelect } from '../utils/element.js';
 
 class ToolbarView {
   constructor() {
@@ -7,76 +8,12 @@ class ToolbarView {
   }
 
   init() {
-    this.toolbar.className = 'tse-editor-toolbar';
-    this.toolbar.id = 'tse-editor-toolbar';
+    this.toolbar.className = $tseEditorToolbar;
+    this.toolbar.id = $tseEditorToolbar;
   }
-
-  createOption(value, text, isSelected) {
-    const option = document.createElement('option');
-    option.innerText = text;
-
-    if (value) {
-      option.setAttribute('value', value);
-    }
-
-    if (isSelected) {
-      option.setAttribute('selected', isSelected);
-    }
-
-    return option;
-  }
-
-  createSelect(id, title, options, handler) {
-    const select = document.createElement('select');
-    select.dataset.id = id;
-    select.className = $toolbarItem;
-    select.title = title;
-
-    select.addEventListener('change', (e) => {
-      const optionValue = e.target.options[e.target.selectedIndex].value;
-      handler(id, optionValue);
-    });
-
-    for (const option of options) {
-      const { value, text, selected } = option;
-
-      select.insertAdjacentElement(
-        'beforeend',
-        this.createOption(value, text, selected)
-      );
-    }
-
-    return select;
-  }
-
-  createIcon(className) {
-    const icon = document.createElement('i');
-    icon.className = className;
-
-    return icon;
-  }
-
-  createSeparator() {
-    const separator = document.createElement('span');
-    separator.className = $toolbarSeperator;
-
-    return separator;
-  }
-
-  createButton = (commandId, title, children, handler, extraClass = '') => {
-    const button = document.createElement('button');
-    button.dataset.commandId = commandId;
-    button.className = $toolbarItem + ' ' + extraClass;
-    button.title = title;
-    button.type = 'button';
-    button.insertAdjacentElement('beforeend', children);
-    button.addEventListener('click', () => handler(title, commandId));
-
-    return button;
-  };
 
   makeSelects(command) {
-    const formatSelects = this.createSelect(
+    const formatSelects = createSelect(
       'formatblock',
       'Styles',
       [
@@ -92,7 +29,7 @@ class ToolbarView {
       command
     );
 
-    const fontNameSelects = this.createSelect(
+    const fontNameSelects = createSelect(
       'fontname',
       'Font',
       [
@@ -112,31 +49,31 @@ class ToolbarView {
   }
 
   makeButtons(command) {
-    const boldButton = this.createButton(
+    const boldButton = createButton(
       'bold',
       'Bold',
-      this.createIcon('fas fa-bold'),
+      createIcon('fas fa-bold'),
       command
     );
 
-    const italicButton = this.createButton(
+    const italicButton = createButton(
       'italic',
       'Italic',
-      this.createIcon('fas fa-italic'),
+      createIcon('fas fa-italic'),
       command
     );
 
-    const underLineButton = this.createButton(
+    const underLineButton = createButton(
       'underline',
       'underline',
-      this.createIcon('fas fa-underline'),
+      createIcon('fas fa-underline'),
       command
     );
 
-    const uploadImage = this.createButton(
+    const uploadImage = createButton(
       'inertImage',
       'insertImage',
-      this.createIcon('fas fa-image'),
+      createIcon('fas fa-image'),
       command,
       'tse-image-upload-button'
     );
@@ -150,24 +87,24 @@ class ToolbarView {
   }
 
   makeAlign(command) {
-    const left = this.createButton(
+    const left = createButton(
       'Left align',
       'justifyLeft',
-      this.createIcon('fas fa-align-left'),
+      createIcon('fas fa-align-left'),
       command
     );
 
-    const right = this.createButton(
+    const right = createButton(
       'Right align',
       'justifyRight',
-      this.createIcon('fas fa-align-right'),
+      createIcon('fas fa-align-right'),
       command
     );
 
-    const center = this.createButton(
+    const center = createButton(
       'Center align',
       'justifyCenter',
-      this.createIcon('fas fa-align-center'),
+      createIcon('fas fa-align-center'),
       command
     );
 
@@ -179,17 +116,17 @@ class ToolbarView {
   }
 
   makeList(command) {
-    const bulletedList = this.createButton(
+    const bulletedList = createButton(
       'Bulleted list',
       'insertUnorderedList',
-      this.createIcon('fas fa-list-ul'),
+      createIcon('fas fa-list-ul'),
       command
     );
 
-    const numberdList = this.createButton(
+    const numberdList = createButton(
       'Numbered list',
       'insertOrderedList',
-      this.createIcon('fas fa-list-ol'),
+      createIcon('fas fa-list-ol'),
       command
     );
 
@@ -200,34 +137,23 @@ class ToolbarView {
   }
 
   makeIndent(command) {
-    const dcreasedIndent = this.createButton(
+    const dcreasedIndent = createButton(
       'Decrease indent',
       'outdent',
-      this.createIcon('fas fa-indent fa-flip-horizontal'),
+      createIcon('fas fa-indent fa-flip-horizontal'),
       command
     );
 
-    const increasedIndent = this.createButton(
+    const increasedIndent = createButton(
       'Increase indent',
       'indent',
-      this.createIcon('fas fa-indent'),
+      createIcon('fas fa-indent'),
       command
     );
     return {
       dcreasedIndent,
       increasedIndent,
     };
-  }
-
-  makeSaveButton(command) {
-    const saveButton = this.createButton(
-      '',
-      '',
-      this.createIcon('fas fa-save'),
-      command
-    );
-
-    return { saveButton };
   }
 }
 
