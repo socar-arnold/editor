@@ -4,20 +4,6 @@
   padding: 24px;
 }
 
-.__editor {
-  background: #ffffff;
-  border: solid 1px #e0e0e0;
-  color: #000000;
-  font-family: 'serif';
-  margin-top: 10px;
-  overflow: scroll;
-  padding: 10px;
-}
-
-.__editor:focus {
-  outline: none;
-}
-
 .tse-editor-toolbar {
   display: flex;
   flex-wrap: wrap;
@@ -46,4 +32,12 @@
 
 .tse-toolbar-separator:last-child {
   display: none;
+}
+
+.hidden {
+  visibility: hidden;
+  height: 0px;
+  width: 0px;
+
+  transform: 0.3s ease-in-out;
 }

@@ -1,3 +1,5 @@
+import { createSeparator } from '../utils/element.js';
+
 export default class ToolbarController {
   constructor({ model, view }) {
     this.model = model;
@@ -6,7 +8,6 @@ export default class ToolbarController {
   }
 
   init() {
-    console.log('init toolbar controlder');
     this.view.init();
     this.addOptionsInToolBar(this.execCommand);
     this.addToolbarNodeIntoEditor();
@@ -15,7 +16,6 @@ export default class ToolbarController {
   }
 
   execCommand(commandId, value) {
-    console.log('execCommand', { commandId }, { value });
     document?.execCommand(commandId, false, value || '');
   }
 
@@ -25,24 +25,28 @@ export default class ToolbarController {
     editor.insertAdjacentElement('beforebegin', this.view.toolbar);
   }
 
-  uploadImageCommand(commandId, value, callback) {
-    // 1. popup image upload link
+  // addImagePopupInImageTool(uploadImage) {
+  //   // 1. popup image upload link
 
-    const container = document.querySelector('.tse-image-upload-button');
-    const popup = document.createElement('div');
-    popup.className = 'tse-image-upload-popup';
-    popup.innerHTML = /* html */ `
-      <input type="file">
-      <button>save</button>
-      <button>remove</button>
-      <button>finish</button>
-    `;
-    // 2. insert image into editor with insertImage commandKeyword
+  //   const container = uploadImage;
+  //   const popup = document.createElement('div');
+  //   popup.className = 'tse-image-upload-popup hidden';
+  //   popup.innerHTML = /* html */ `
+  //     <input type="file">
+  //     <button>save</button>
+  //     <button>remove</button>
+  //     <button>finish</button>
+  //   `;
+  //   // 2. insert image into editor with insertImage commandKeyword
+  //   container.insertAdjacentElement('afterend', popup);
+  // }
 
-    container.insertAdjacentElement('afterend', popup);
-
-    console.log(commandId, value);
-  }
+  // uploadImageCommand(commandId, value, callback) {
+  //   //*TODO: find element in direct way is not good
+  //   const popup = document.querySelector('.tse-image-upload-popup hidden');
+  //   if (popup.classList.contains('hidden')) popup.classList.remove('hidden');
+  //   else popup.classList.add('hidden');
+  // }
 
   putImageIntoEditor(imageSource) {
     document.execCommand('insertImage', false, imageSource);
@@ -53,7 +57,7 @@ export default class ToolbarController {
 
     const { boldButton, italicButton, underLineButton } =
       this.view.makeButtons(command);
-    const { uploadImage } = this.view.makeButtons(this.uploadImageCommand);
+    // const { uploadImage } = this.view.makeButtons(this.uploadImageCommand);
 
     const { left, right, center } = this.view.makeAlign(command);
     const { bulletedList, numberdList } = this.view.makeList(command);
@@ -62,37 +66,26 @@ export default class ToolbarController {
     this.view.toolbar.insertAdjacentElement('beforeend', formatSelects);
     this.view.toolbar.insertAdjacentElement('beforeend', fontNameSelects);
 
-    this.view.toolbar.insertAdjacentElement(
-      'beforeend',
-      this.view.createSeparator()
-    );
+    this.view.toolbar.insertAdjacentElement('beforeend', createSeparator());
 
     this.view.toolbar.insertAdjacentElement('beforeend', boldButton);
     this.view.toolbar.insertAdjacentElement('beforeend', italicButton);
     this.view.toolbar.insertAdjacentElement('beforeend', underLineButton);
-    this.view.toolbar.insertAdjacentElement('beforeend', uploadImage);
+    // this.view.toolbar.insertAdjacentElement('beforeend', uploadImage);
+    // this.addImagePopupInImageTool(uploadImage);
 
-    this.view.toolbar.insertAdjacentElement(
-      'beforeend',
-      this.view.createSeparator()
-    );
+    this.view.toolbar.insertAdjacentElement('beforeend', createSeparator());
 
     this.view.toolbar.insertAdjacentElement('beforeend', left);
     this.view.toolbar.insertAdjacentElement('beforeend', center);
     this.view.toolbar.insertAdjacentElement('beforeend', right);
 
-    this.view.toolbar.insertAdjacentElement(
-      'beforeend',
-      this.view.createSeparator()
-    );
+    this.view.toolbar.insertAdjacentElement('beforeend', createSeparator());
 
     this.view.toolbar.insertAdjacentElement('beforeend', bulletedList);
     this.view.toolbar.insertAdjacentElement('beforeend', numberdList);
 
-    this.view.toolbar.insertAdjacentElement(
-      'beforeend',
-      this.view.createSeparator()
-    );
+    this.view.toolbar.insertAdjacentElement('beforeend', createSeparator());
 
     this.view.toolbar.insertAdjacentElement('beforeend', increasedIndent);
     this.view.toolbar.insertAdjacentElement('beforeend', dcreasedIndent);
