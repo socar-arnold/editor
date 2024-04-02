@@ -4,8 +4,8 @@ import { customSaveData } from '../event/save.js';
 class TextEditorController {
   /**
    *
-   * @param {*} editorView EditorView
-   * @param {*} toolbarView ToolbarView
+   * @param {*} view TextEditorView
+   * @param {*} model TextEditorModel
    */
   constructor({ model, view }) {
     this.model = model;
